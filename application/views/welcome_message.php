@@ -58,18 +58,22 @@
 	}
 	
 	#container{
-		margin: 10px;
+		width: 50%;
+		margin: 10px auto;
 		border: 1px solid #D0D0D0;
 		-webkit-box-shadow: 0 0 8px #D0D0D0;
 	}
+	
 	#container #authWrap .login label.uid,
 	#container #authWrap .login label.pwd{
 		width: 120px;
 		display: inline-block;
 	}
+	
 	#container #authWrap .login input[type="submit"]{
 		margin-left: 230px;
 	}
+	
 	</style>
 </head>
 <body>
@@ -81,7 +85,22 @@
 	<div id="body">
 		<div id="authWrap">
 			<div class="login">
-				<form method="post" action="<?php echo base_url()."index.php/welcome/addUserInfo";?>">
+				<?php
+				/*$b = array(
+						"name" => "pijus kumar",
+						"email" => "pijus.sarker@gmail.com"
+				);
+				$c = json_encode($b);
+				$d = json_decode($c);
+				print_r($d);
+				echo "<br />".$c."<br />";*/
+				if(isset($login) && $login == 1)
+				{
+					echo "<label>Your User Id : <b>" . $info["userid"] . "</b><br /><b>&</b><br />Password : <b>". $info["password"]."</b><hr />";
+				}	
+				?>
+				
+				<form method="post" action="<?php echo base_url()."index.php/welcome/getInfo";?>">
 					<label class="uid">User Id: </label><label><input type="text" name="userId" value="" /></label><br />
 					<label class="pwd">Password: </label><label><input type="password" name="userPwd" value="" /></label>
 					<br />

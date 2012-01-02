@@ -10,7 +10,7 @@ loadDependencies($dependencies);
 $endpoint="/login";
 
 
-$app->get("/userInfo/:id",function($id){
+$app->get("/userInfo/getByid/:id",function($id){
   $em = DoctrineConfig::getEntityManager();
   try{
     $query = $em->createQuery(" SELECT u FROM \entity\Login u where u.id = $id");
@@ -20,9 +20,9 @@ $app->get("/userInfo/:id",function($id){
 		echo json_encode(array('success'=>false, 'reason'=>$ex->getMessage()));
 	}
 });
-/*
-$app->get("/getUser/data",function($data){
- /* $em = DoctrineConfig::getEntityManager();
+
+$app->get("/getUser/:data",function($d){
+  /*$em = DoctrineConfig::getEntityManager();
   try{
     $query = $em->createQuery(" SELECT u FROM \entity\Login u where u.id = $id");
     $arr = $query->getArrayResult();
@@ -30,16 +30,28 @@ $app->get("/getUser/data",function($data){
   }catch(Exception $ex){
 		echo json_encode(array('success'=>false, 'reason'=>$ex->getMessage()));
 	}*/
+	
 	/*$data = array(
 			"uid" => $this->input->post("userId"),
 			"pwd" => $this->input->post("userPwd"),
 			"succed" => "SUCCED"
 	);
-	
-		echo json_encode($data);
-			
-	
-});*/
+	*/
+	$ca = explode("&",$d);
+	$ar = array();
+	for($i = 0; $i< count($ca); $i++)
+	{
+		$pa = explode("=",$ca[$i]);
+		$tm = array($pa[0]=>$pa[1]);
+		$ar = array_merge($ar,$tm);
+	}
+	$data = array(
+			"succed" => "SUCCED"
+	);
+	$mar = array_merge($ar,$data);
+		 echo json_encode($mar);
+});
+
 /*$app->post('/insertUserdata', function () use ($app) {
 	$em = DoctrineConfig::getEntityManager();
 	try{

@@ -32,6 +32,19 @@ class Welcome extends CI_Controller {
 		$uinfo = $this->rndM->getUserInfo($id);
 		print_r($uinfo);
 	}
+	public function getInfo(){
+		$data = array(
+				"userid" => $this->input->post("userId"),
+				"password" => $this->input->post("userPwd")
+		);
+		$d = $this->rndM->getInfo($data);
+		//print_r($d);
+		$info = array(
+				"login" => 1,
+				"info" => $d
+		);
+		$this->load->view('welcome_message',$info);
+	}
 	public function addUserInfo(){
 		$data = array(
 				"userid" => $this->input->post("userId"),
